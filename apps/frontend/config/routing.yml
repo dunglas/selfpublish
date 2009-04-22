@@ -1,0 +1,83 @@
+# Article rules
+article_promote:
+  url:          /promote/:slug
+  param:        { module: article, action: vote, promote: 1 }
+
+article_demote:
+  url:          /demote/:slug
+  param:        { module: article, action: vote, promote: 0 }
+
+article_create:
+  url:          /articles
+  param:        { module: article, action: create }
+  class:        sfRequestRoute
+  requirements: { sf_method: post }
+  
+article_view:
+  url:          /articles/:slug
+  param:        { module: article, action: view }
+  class:        sfRequestRoute
+  requirements: { sf_method: get }
+
+article_update:
+  url:          /articles/:slug
+  param:        { module: article, action: update }
+  class:        sfRequestRoute
+  requirements: { sf_method: put }
+
+article_top:
+  url:          /top/:time
+  param:        { module: article, action: top, time: 24-hours }
+  class:        sfRequestRoute
+  requirements: { sf_method: get }
+
+article_index:
+  url:          /articles/:page
+  param:        { module: article, action: index, page: 1 }
+  class:        sfRequestRoute
+  requirements: { sf_method: get }
+
+article_new:
+  url:          /new-article
+  param:        { module: article, action: new }
+
+article_edit:
+  url:          /edit-article/:slug
+  param:        { module: article, action: edit }
+  
+# sfComment rules
+
+sf_comment_comment:
+  url:          /comments
+  param:        { module: sfComment, action: comment }
+  class:        sfRequestRoute
+  requirements: { sf_method: post }
+
+# sfGuard rules
+sf_guard_register:
+  url:          /register
+  param:        { module: sfGuardAuth, action: register }
+
+sf_guard_signin:
+  url:          /login
+  param:        { module: sfGuardAuth, action: signin }
+ 
+sf_guard_signout:
+  url:          /logout
+  param:        { module: sfGuardAuth, action: signout }
+ 
+sf_guard_password:
+  url:          /request-password
+  param:        { module: sfGuardAuth, action: password }
+
+# default rules
+homepage:
+  url:          /
+  param:        { module: article, action: index }
+
+default_index:
+  url:          /:module
+  param:        { action: index }
+
+default:
+  url:          /:module/:action/*
